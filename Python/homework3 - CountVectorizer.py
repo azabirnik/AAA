@@ -1,8 +1,6 @@
 # Aleksei Zabirnik <azabirnik@gmail.com>
 # Avito Academy homework 3 - CountVectorizer class
 
-from typing import List
-
 
 class CountVectorizer:
     """ CountVectorizer is a class a simple text vectorization """
@@ -10,18 +8,17 @@ class CountVectorizer:
 
     def __init__(self) -> None:
         """ Sets empty feature_names list """
-        self.feature_names = None
+        self.feature_names = []
 
-    def fit_transform(self, corpus: List[str]) -> List[List[int]]:
+    def fit_transform(self, corpus: list[str]) -> list[list[int]]:
         """ Transfprm corpus of texts into bag of words vectors """
         tokenized_texts = [text.lower().split() for text in corpus]
         self.feature_names = list(set([word for text in tokenized_texts for word in text])
                                   - self.stop_words)
         # self.feature_names.sort() may be added to use with bisect() search instead of index()
-        feature_vectors = [[0]*len(self.feature_names) for x in range(len(tokenized_texts))]
-        for i in range(len(tokenized_texts)):
-            feature_vector = feature_vectors[i]
-            tokenized_text = tokenized_texts[i]
+        feature_vectors = [[0]*len(self.feature_names) for _ in range(len(tokenized_texts))]
+
+        for feature_vector, tokenized_text in zip(feature_vectors, tokenized_texts):
             for word in tokenized_text:
                 feature_vector[self.feature_names.index(word)] += 1
         return feature_vectors
