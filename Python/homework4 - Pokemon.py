@@ -12,6 +12,7 @@ class Pokemon:
 
 
 class EmojiMixin:
+    """ The mixin that adds emoji to output """
     emoji = {
         'grass': '🌿',
         'fire': '🔥',
@@ -20,7 +21,7 @@ class EmojiMixin:
     }
 
     def __str__(self) -> str:
-        """ The mixin that adds emoji to output """
+        """ Change pokemon class representation """
         unformatted_str = super().__str__()
         for i in range(len(unformatted_str)):
             if unformatted_str[i] == '/':
