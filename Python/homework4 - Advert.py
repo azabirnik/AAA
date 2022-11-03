@@ -36,13 +36,16 @@ class Advert(PythonObjectFromDict):
             self.price = 0
 
     def __repr__(self):
+        """ Basic representation for an advert """
         return f'{self.title} | {self.price} ₽'
 
 
 class ColorizeMixin:
+    """ This mixin is userd to colorize any class"""
     repr_color_code = 32  # green
 
     def __repr__(self) -> str:
+        """" Colorize with repr_color_code """
         return f'\033[1;{self.repr_color_code};'\
                f'40m{super().__repr__()}\033[0m'
 
@@ -52,7 +55,6 @@ class ColorAdvert(ColorizeMixin, Advert):
 
 
 if __name__ == '__main__':
-
     print('Test 1:')
     lesson_str = """{
         "title": "python",
